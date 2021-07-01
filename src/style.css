@@ -1,0 +1,297 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  background: rgb(47, 47, 47);
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  margin-left: 30px;
+}
+
+h2 {
+  line-height: 20%;
+}
+
+.opaque {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgb(148, 143, 143);
+  z-index: 100;
+  display: none;
+  opacity: 0;
+}
+
+.sidebar {
+  grid-column: span 2;
+  border-right: solid rgb(78, 78, 78);
+  box-shadow: 1px 0px 5px rgb(77, 77, 77),
+              -4px 0px 9px -4px rgb(77, 77, 77) inset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar--button {
+  padding: 5px;
+  border-radius: 20px;
+  width: 50%;
+  box-shadow: 1px 1px 2px rgb(32, 32, 32) inset,
+              -1px -1px 1px rgb(110, 109, 109) inset;
+  margin-bottom: 5px;
+}
+
+.sidebar--button:hover {
+  background-color: rgb(77, 75, 75);
+  cursor: pointer;
+}
+
+#inbox {
+  margin-bottom: 20px;
+}
+
+.sidebar--create {
+  border-radius: 20px;
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  box-shadow: 2px 2px 2px rgb(32, 32, 32),
+              -1px -1px 1px rgb(110, 109, 109);
+}
+
+.sidebar--text {
+  display: inline;
+  margin-left: 30px;
+}
+
+.button {
+  margin-left: 20px;
+}
+
+.fas, .far, .fab {
+  display: inline;
+  position: absolute;
+}
+
+.separator {
+  width: 90%;
+  border-color: rgb(139, 137, 137);
+}
+
+main {
+  grid-column: span 10;
+}
+
+.task {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 50px 120px;
+  align-items: center;
+  width: 60%;
+  height: 50px;
+  margin: auto;
+  box-shadow: 1px 1px 2px rgb(32, 32, 32) inset,
+              -1px -1px 1px rgb(110, 109, 109) inset;
+  border-radius: 20px;
+  overflow: hidden;
+  padding-left: 20px;
+  margin-bottom: 20px;
+} 
+
+.task--checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: solid 2px rgb(95, 95, 95);
+  grid-column: span 1;
+  color: rgb(47, 47, 47);
+}
+
+.task--checkbox:hover {
+  color: white;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.task--expand-colapse{
+  grid-column: 11/12;
+}
+
+.fa-chevron-down, .fa-chevron-up {
+  font-size: 30px;
+}
+
+.fa-chevron-down:hover, .fa-chevron-up:hover {
+  text-shadow: 1px 1px 3px white,
+               -1px 1px 3px black;
+  cursor: pointer;
+}
+
+.task--title {
+  grid-column: span 3;
+}
+
+.task--project {
+  grid-column: span 3;
+}
+
+.task--text {
+  display: inline;
+  margin-left: 20px;
+}
+
+.task--date {
+  grid-column: span 3;
+}
+
+.task--priority {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, rgb(47, 47, 47) 0%, rgba(230,20,20,1) 100%);
+  grid-column: 12/14;
+  grid-row: 1/3;
+  z-index: -100;
+}
+
+.task-description {
+  grid-column: span 7;
+  max-height: 100px;
+  overflow-y: scroll;
+  margin-bottom: 10px;
+  margin-right: 20px;
+}
+
+.task--button {
+  display: block;
+  position: initial;
+  align-self: flex-start;
+}
+
+::-webkit-scrollbar {
+  background-color: rgb(47, 47, 47);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(87, 82, 82);
+  border-radius: 20px;
+}
+
+.collapsed {
+  height: 50px;
+  transition: .4s ease-in;
+}
+
+.expanded {
+  height: 170px;
+  transition: .4s ease-out;
+}
+
+
+.create-task-form {
+  z-index: 200;
+  background-color: rgb(47, 47, 47);
+  position: absolute;
+  left: 25%;
+  top: 10%;
+  display: none;
+  opacity: 0;
+}
+
+.form--title {
+  width: 100%;
+  height: 60%;
+  margin: 0;
+  padding-left: 10px;
+}
+
+.form--project {
+  justify-self: center;
+}
+
+.form--date {
+  grid-column: 8/10;
+}
+
+.form--description {
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+}
+
+.form--description--container {
+  height: 100%;
+}
+
+.form--priority {
+  display: flex;
+}
+
+.fa-times-circle {
+  grid-column: 12/13;
+  grid-row: 1/2;
+  justify-self: right;
+  align-self: flex-start;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.fa-times-circle:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.form--accept {
+  grid-column: 12/13;
+  grid-row: 2/3;
+  width: 16px;
+  height: 16px;
+  align-self: flex-end;
+  justify-self: flex-end;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.form--accept:hover {
+  cursor: pointer;
+  color: green;
+}
+
+input {
+  background-color: rgb(47, 47, 47);
+  border-radius: 20px;
+  color: white;
+  border: none;
+  box-shadow: 1px 1px 2px rgb(32, 32, 32) inset,
+              -1px -1px 1px rgb(110, 109, 109) inset;
+}
+
+input:focus-visible {
+  outline: none;
+}
+
+.form--visible {
+  display: grid;
+  opacity: 1;
+  transition: opacity .4s ease-in;
+}
+
+.opaque--visible {
+  display: block;
+  opacity: .6;
+  transition: opacity .4s ease-in;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
