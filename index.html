@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To Do App</title>
+    <script src="https://kit.fontawesome.com/dffe8b7b3b.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+
+    <div class="opaque" id="opaque"></div>
+    <form id="create-task-form" class="create-task-form task expanded">
+      <input type="text" placeholder="Title" class="task--text task--title form--title" id="task-title"></input>
+      <div class="task--project form--project">
+        <i class="fas fa-circle"></i>
+        <p class="task--text">Project:</p>
+        <select id="task-project" class="task--text">
+          <option value="inbox">Inbox</option>
+        </select>
+      </div>
+      <div class="task--date form--date">
+        <input type="date"  id="task-due-date"></input>
+      </div>
+      
+      <div class="task-description form--description--container">
+        <input type="text" placeholder="Description" class="form--description" id="task-description"></input>
+      </div>
+      
+      <div class="form--priority">
+        <i class="fas fa-flag task--button"></i>
+        <select id="task-priority" class="task--text">
+          <option value="Normal">Normal</option>
+        </select>
+      </div>
+      <i id="close-form" class="far fa-times-circle"></i>
+      <div id="accept-form" class="form--accept"><i class="fas fa-check"></i></div>
+
+    </form>
+
+    <div class="sidebar" id="sidebar">
+
+      <div class="sidebar--button sidebar--create" id="create-task">
+        <i class="fas fa-plus"></i>
+        <p class="sidebar--text button">Create Task</p>
+      </div>
+
+      <div class="sidebar--button" id="inbox">
+        <i class="fas fa-inbox"></i>
+        <p class="sidebar--text">Inbox</p>
+      </div>
+
+      <div class="sidebar--button" id="today-tasks">
+        <i class="far fa-calendar"></i>
+        <p class="sidebar--text">Today</p>
+      </div>
+      <div class="sidebar--button" id="upcoming-tasks">
+        <i class="far fa-calendar-alt"></i>
+        <p class="sidebar--text">Upcoming</p>
+      </div>
+      <div class="sidebar--button" id="past-tasks">
+        <i class="far fa-calendar-times"></i>
+        <p class="sidebar--text">Past</p>
+      </div>
+
+      <hr class="separator">
+
+      <div>
+        <h2>PROJECTS</h2>
+      </div>
+
+      <div class="sidebar--button">
+        <i class="fas fa-circle"></i>
+        <p class="sidebar--text">Code</p>
+      </div>
+
+      <div class="sidebar--button">
+        <i class="fas fa-circle"></i>
+        <p class="sidebar--text">Music</p>
+      </div>
+
+      <div class="sidebar--button">
+        <i class="fas fa-circle"></i>
+        <p class="sidebar--text">Grossery</p>
+      </div>
+
+    </div>
+
+    <main>
+      <h1>INBOX</h1>
+      <hr class="separator">
+
+      <div class="task collapsed" id="task">
+        <div class="task--checkbox">
+          <i class="fas fa-check"></i>
+        </div>
+        <p class="task--text task--title">Code for 4 hours</p>
+        <div class="task--project">
+          <i class="fas fa-circle"></i>
+          <p class="task--text">Project</p>
+        </div>
+        <div class="task--date">
+          <i class="far fa-calendar-alt"></i>
+          <p class="task--text">10/10/2021</p>
+        </div>
+
+        <div class="task--expand-colapse" id="expand-colapse"><i class="fas fa-chevron-down task--button"></i></div>
+
+        <div class="task--priority"></div>
+
+        <div class="task-description">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et ligula et arcu commodo tristique a sit amet lectus. Duis posuere magna nec sodales rutrum. Nulla quis lorem accumsan tortor rhoncus scelerisque non in odio. Proin eros tellus, pretium in accumsan non, maximus sed lorem. Duis tristique massa ac lobortis rutrum. In pharetra eget diam id interdum. Proin lectus orci, iaculis id quam a, tristique pellentesque massa. Fusce porttitor lacinia nunc, et scelerisque lacus venenatis vel. In tempus felis a nulla interdum ullamcorper in nec mauris.</p>
+        </div>
+
+        <i class="fas fa-flag task--button"></i>
+        <i class="fas fa-pen task--button"></i>
+        <i class="far fa-trash-alt task--button"></i>
+      </div>
+
+    </main>
+
+    <script src="./bundle.js"></script>
+  </body>
+</html>
