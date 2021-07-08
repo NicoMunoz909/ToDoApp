@@ -1,7 +1,9 @@
 import './style.css'
 import createTask from './tasksCreator.js'
+import {ViewController, TasksElementController, DOMController} from './DOMControl.js'
+import {TasksObjectController} from './LogicControl'
 
-function expandClose() {
+/*function expandClose() {
   let task = this.parentElement;
   let button = this.firstChild;
   if (task.classList.contains('collapsed')) {
@@ -28,15 +30,13 @@ function openCloseForm() {
   }
 
 function formCallback() {
-  console.log('callback')
-
-  let title = document.getElementById('task-title').value;
+  const title = document.getElementById('task-title').value;
   let description = document.getElementById('task-description').value;
   let project = document.getElementById('task-project').value;
   let dueDate = document.getElementById('task-due-date').value;
   let priority = document.getElementById('task-priority').value;
 
-  console.log(title);
+  console.log(createTask(title, description, project, dueDate, priority));
 } 
 
 let expandColapseButton = document.getElementById('expand-colapse');
@@ -49,5 +49,6 @@ let closeFormButton = document.getElementById('close-form');
 closeFormButton.addEventListener('click', openCloseForm);
 
 let acceptFormButton = document.getElementById('accept-form');
+acceptFormButton.addEventListener('click', formCallback);
 acceptFormButton.addEventListener('click', openCloseForm);
-acceptFormButton.addEventListener('click', formCallback)
+*/
