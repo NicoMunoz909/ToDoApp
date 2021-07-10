@@ -1,4 +1,3 @@
-
 const TasksObjectController = () => {
 
   const tasksArray = [];
@@ -8,5 +7,7 @@ const TasksObjectController = () => {
     tasksArray.push(task);
   }
 
-  return {createTask}
+  return {tasksArray, createTask}
 }
+
+export {TasksObjectController}

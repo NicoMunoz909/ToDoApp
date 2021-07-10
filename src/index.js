@@ -1,7 +1,6 @@
 import './style.css'
-import createTask from './tasksCreator.js'
-import {ViewController, TasksElementController, DOMController} from './DOMControl.js'
-import {TasksObjectController} from './LogicControl'
+import {Controller} from './Controller.js'
+
 
 /*function expandClose() {
   let task = this.parentElement;

@@ -1,4 +1,4 @@
-const ViewController = (() => {
+const ViewController = () => {
 
   const openInbox = () => {}
 
@@ -9,9 +9,9 @@ const ViewController = (() => {
   const openUpcomingTasks = () => {}
 
   const openPastTasks = () => {}
-})()
+}
 
-const TasksElementController = (() => {
+const TasksElementController = () => {
 
   const createTask = () => {}
 
@@ -42,9 +42,9 @@ const TasksElementController = (() => {
     })
   })();
 
-})()
+}
 
-const DOMController = (() => {
+const DOMController = () => {
 
   const openCreateTaskForm = () => {
     let form = document.getElementById('create-task-form');
@@ -63,18 +63,6 @@ const DOMController = (() => {
 
   const openCloseEditTaskForm = () => {}
 
-  const createTaskFormCallback = () => {
-
-    const title = document.getElementById('task-title').value;
-    const description = document.getElementById('task-description').value;
-    const project = document.getElementById('task-project').value;
-    const dueDate = document.getElementById('task-due-date').value;
-    const priority = document.getElementById('task-priority').value;
-
-    TasksObjectController.createTask(title, description, project, dueDate, priority);
-    console.log(title, description, project, dueDate, priority);
-  }
-
   const editTaskFormCallback = () => {}
 
   const addEventsListeners = (() => {
@@ -85,8 +73,9 @@ const DOMController = (() => {
     closeFormButton.addEventListener('click', closeCreateTaskForm);
 
     const acceptFormButton = document.getElementById('accept-form');
-    acceptFormButton.addEventListener('click', createTaskFormCallback);
     acceptFormButton.addEventListener('click', closeCreateTaskForm);
   })();
 
-})()
+}
+
+export {ViewController, TasksElementController, DOMController}
