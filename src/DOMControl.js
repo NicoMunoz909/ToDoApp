@@ -1,50 +1,114 @@
 const ViewController = () => {
 
-  const openInbox = () => {}
+  const createTask = (task) => {
+    const taskContainer = document.createElement('div');
+    taskContainer.classList.add('task', 'collapsed');
+    taskContainer.id = "task";
 
-  const openProject = (project) => {}
+    const taskCheckbox = document.createElement('div');
+    taskCheckbox.classList.add('task--checkbox');
+    const checkIcon = document.createElement('i');
+    checkIcon.classList.add('fas', 'fa-check');
+    taskCheckbox.appendChild(checkIcon);
+    taskContainer.appendChild(taskCheckbox);
 
-  const openTodayTasks = () => {}
+    const taskTitle = document.createElement('p');
+    taskTitle.classList.add('task--text', 'task--title');
+    taskTitle.textContent = task.title;
+    taskContainer.appendChild(taskTitle);
 
-  const openUpcomingTasks = () => {}
+    const taskProject = document.createElement('div');
+    taskProject.classList.add('task--project');
+    const projectIcon = document.createElement('i');
+    projectIcon.classList.add('fas', 'fa-circle');
+    const projectName = document.createElement('p');
+    projectName.classList.add('task--text');
+    projectName.textContent = task.project;
+    taskProject.appendChild(projectIcon);
+    taskProject.appendChild(projectName);
+    taskContainer.appendChild(taskProject);
 
-  const openPastTasks = () => {}
-}
+    const taskDate = document.createElement('div');
+    taskDate.classList.add('task--date');
+    const dateIcon = document.createElement('i');
+    dateIcon.classList.add('far', 'fa-calendar-alt');
+    const date = document.createElement('p');
+    date.classList.add('task--text');
+    date.textContent = task.dueDate;
+    taskDate.appendChild(dateIcon);
+    taskDate.appendChild(date);
+    taskContainer.appendChild(taskDate);
 
-const TasksElementController = () => {
+    const taskExpandColapse = document.createElement('div');
+    taskExpandColapse.classList.add('task--expand-colapse');
+    taskExpandColapse.id = 'expand-colapse'
+    const expandColapseIcon = document.createElement('i');
+    expandColapseIcon.classList.add('fas', 'fa-chevron-down', 'task--button');
+    taskExpandColapse.appendChild(expandColapseIcon);
+    taskContainer.appendChild(taskExpandColapse);
 
-  const createTask = () => {}
+    const taskPriority = document.createElement('div');
+    taskPriority.classList.add('task--priority');
+    taskContainer.appendChild(taskPriority);
+
+    const taskDescription = document.createElement('div');
+    taskDescription.classList.add('task-description');
+    const description = document.createElement('p');
+    description.textContent = task.description;
+    taskDescription.appendChild(description);
+    taskContainer.appendChild(taskDescription);
+
+    const priorityButton = document.createElement('i');
+    priorityButton.classList.add('fas', 'fa-flag', 'task--button');
+    const editButton = document.createElement('i');
+    editButton.classList.add('fas', 'fa-pen', 'task--button');
+    const deleteButton = document.createElement('i');
+    deleteButton.classList.add('fas', 'fa-trash-alt', 'task--button');
+    taskContainer.appendChild(priorityButton);
+    taskContainer.appendChild(editButton);
+    taskContainer.appendChild(deleteButton);
+
+    return taskContainer;
+  }
 
   const editTask = () => {}
 
   const deleteTask = () => {}
 
   const expandColapseTask = (mouseEvent) => {
-    task = mouseEvent.path[2];
-    button = mouseEvent.srcElement;
-    if (task.classList.contains('collapsed')) {
-      button.classList.add('fa-chevron-up');
-      button.classList.remove('fa-chevron-down');
-      task.classList.remove('collapsed');
-      task.classList.add('expanded');
-    } else {
-      button.classList.add('fa-chevron-down');
-      button.classList.remove('fa-chevron-up');
-      task.classList.remove('expanded');
-      task.classList.add('collapsed');
-    }
+  const task = mouseEvent.path[2];
+  const button = mouseEvent.srcElement;
+  if (task.classList.contains('collapsed')) {
+    button.classList.add('fa-chevron-up');
+    button.classList.remove('fa-chevron-down');
+    task.classList.remove('collapsed');
+    task.classList.add('expanded');
+  } else {
+    button.classList.add('fa-chevron-down');
+    button.classList.remove('fa-chevron-up');
+    task.classList.remove('expanded');
+    task.classList.add('collapsed');
+  }
   }
 
-  const addEventsListeners = (() => {
-    const expandColapseButtonsList = document.querySelectorAll('#expand-colapse');
-    expandColapseButtonsList.forEach( button => {
-      button.addEventListener('click', expandColapseTask.bind(this));
-    })
-  })();
+  const openInbox = (tasksArray) => {
+    let tasks = tasksArray.filter(task => task.project == "Inbox")
+    tasks.forEach(task => {
 
-}
+      const taskElement = createTask(task)
 
-const DOMController = () => {
+      const main = document.getElementById('main');
+      main.appendChild(taskElement)
+    });
+  }
+
+  const openProject = (tasksArray, project) => {}
+
+  const openTodayTasks = (tasksArray) => {}
+
+  const openUpcomingTasks = (tasksArray) => {}
+
+  const openPastTasks = (tasksArray) => {}
 
   const openCreateTaskForm = () => {
     let form = document.getElementById('create-task-form');
@@ -61,21 +125,11 @@ const DOMController = () => {
     opaque.classList.remove('opaque--visible');
   }
 
-  const openCloseEditTaskForm = () => {}
+  const closeEditTaskForm = () => {}
 
-  const editTaskFormCallback = () => {}
+  const openEditTaskForm = () => {}
 
-  const addEventsListeners = (() => {
-    const createTaskButton = document.getElementById('create-task');
-    createTaskButton.addEventListener('click', openCreateTaskForm);
-
-    const closeFormButton = document.getElementById('close-form');
-    closeFormButton.addEventListener('click', closeCreateTaskForm);
-
-    const acceptFormButton = document.getElementById('accept-form');
-    acceptFormButton.addEventListener('click', closeCreateTaskForm);
-  })();
-
+  return {createTask, editTask, deleteTask, expandColapseTask, openInbox, openProject, openTodayTasks, openUpcomingTasks, openPastTasks,openCreateTaskForm,closeCreateTaskForm, openEditTaskForm, closeEditTaskForm}
 }
 
-export {ViewController, TasksElementController, DOMController}
+export {ViewController}

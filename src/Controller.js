@@ -1,13 +1,10 @@
-import {ViewController, TasksElementController, DOMController} from './DOMControl.js'
+import {ViewController} from './DOMControl.js'
 import {TasksObjectController} from './LogicControl'
 
 const Controller = (() => {
 
-    ViewController();
-    TasksElementController();
-    DOMController();
-
-    TasksObjectController();
+    const viewControl = ViewController();
+    const logicControl = TasksObjectController();
 
     const createTaskFormCallback = () => {
 
@@ -17,14 +14,28 @@ const Controller = (() => {
         const dueDate = document.getElementById('task-due-date').value;
         const priority = document.getElementById('task-priority').value;
     
-        //TasksObjectController.createTask(title, description, project, dueDate, priority);
-        console.log(title, description, project, dueDate, priority);
+        logicControl.createTask(title, description, project, dueDate, priority);
+        console.log(logicControl.tasksArray)
     }
     
+    viewControl.openInbox(logicControl.tasksArray);
+
     const addEventsListeners = (() => {
+
+        const createTaskButton = document.getElementById('create-task');
+        createTaskButton.addEventListener('click', viewControl.openCreateTaskForm);
+
+        const closeFormButton = document.getElementById('close-form');
+        closeFormButton.addEventListener('click', viewControl.closeCreateTaskForm);
 
         const acceptFormButton = document.getElementById('accept-form');
         acceptFormButton.addEventListener('click', createTaskFormCallback);
+        acceptFormButton.addEventListener('click', viewControl.closeCreateTaskForm);
+
+        const expandColapseButtonsList = document.querySelectorAll('#expand-colapse');
+        expandColapseButtonsList.forEach( button => {
+            button.addEventListener('click', viewControl.expandColapseTask.bind(this));
+        })
 
     })();
 
