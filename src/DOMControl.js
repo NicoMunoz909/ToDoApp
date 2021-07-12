@@ -76,23 +76,29 @@ const ViewController = () => {
   const deleteTask = () => {}
 
   const expandColapseTask = (mouseEvent) => {
-  const task = mouseEvent.path[2];
-  const button = mouseEvent.srcElement;
-  if (task.classList.contains('collapsed')) {
-    button.classList.add('fa-chevron-up');
-    button.classList.remove('fa-chevron-down');
-    task.classList.remove('collapsed');
-    task.classList.add('expanded');
-  } else {
-    button.classList.add('fa-chevron-down');
-    button.classList.remove('fa-chevron-up');
-    task.classList.remove('expanded');
-    task.classList.add('collapsed');
-  }
+    const task = mouseEvent.path[2];
+    const button = mouseEvent.srcElement;
+    if (task.classList.contains('collapsed')) {
+      button.classList.add('fa-chevron-up');
+      button.classList.remove('fa-chevron-down');
+      task.classList.remove('collapsed');
+      task.classList.add('expanded');
+    } else {
+      button.classList.add('fa-chevron-down');
+      button.classList.remove('fa-chevron-up');
+      task.classList.remove('expanded');
+      task.classList.add('collapsed');
+    }
   }
 
-  const openInbox = (tasksArray) => {
-    let tasks = tasksArray.filter(task => task.project == "Inbox")
+  const updateView = (tasksArray) => {
+    const activeView = document.querySelector('div[data-active]');
+    console.log(activeView);
+    //openProject(tasksArray, activeView);
+  }
+
+  const openProject = (tasksArray, project) => {
+    let tasks = tasksArray.filter(task => task.project == project)
     tasks.forEach(task => {
 
       const taskElement = createTask(task)
@@ -101,8 +107,6 @@ const ViewController = () => {
       main.appendChild(taskElement)
     });
   }
-
-  const openProject = (tasksArray, project) => {}
 
   const openTodayTasks = (tasksArray) => {}
 
@@ -129,7 +133,7 @@ const ViewController = () => {
 
   const openEditTaskForm = () => {}
 
-  return {createTask, editTask, deleteTask, expandColapseTask, openInbox, openProject, openTodayTasks, openUpcomingTasks, openPastTasks,openCreateTaskForm,closeCreateTaskForm, openEditTaskForm, closeEditTaskForm}
+  return {createTask, editTask, deleteTask, expandColapseTask, updateView, openProject, openTodayTasks, openUpcomingTasks, openPastTasks,openCreateTaskForm,closeCreateTaskForm, openEditTaskForm, closeEditTaskForm}
 }
 
 export {ViewController}

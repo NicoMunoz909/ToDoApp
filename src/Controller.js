@@ -15,10 +15,10 @@ const Controller = (() => {
         const priority = document.getElementById('task-priority').value;
     
         logicControl.createTask(title, description, project, dueDate, priority);
-        console.log(logicControl.tasksArray)
+        viewControl.updateView(logicControl.tasksArray);
     }
     
-    viewControl.openInbox(logicControl.tasksArray);
+    viewControl.openProject(logicControl.tasksArray, "Inbox");
 
     const addEventsListeners = (() => {
 
