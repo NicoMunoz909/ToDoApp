@@ -3,8 +3,15 @@ import {TasksObjectController} from './LogicControl'
 
 const Controller = (() => {
 
+    let activeView = "Inbox"
+
     const viewControl = ViewController();
     const logicControl = TasksObjectController();
+
+    const updateView = () => {
+        const task = viewControl.createTask(logicControl.tasksArray[logicControl.tasksArray.length -1]);
+        document.getElementById('main').appendChild(task);
+    }
 
     const createTaskFormCallback = () => {
 
@@ -15,10 +22,13 @@ const Controller = (() => {
         const priority = document.getElementById('task-priority').value;
     
         logicControl.createTask(title, description, project, dueDate, priority);
-        viewControl.updateView(logicControl.tasksArray);
+
+        if(project == activeView) {
+            updateView();
+        }
     }
     
-    viewControl.openProject(logicControl.tasksArray, "Inbox");
+    viewControl.openTab(logicControl.tasksArray, "Inbox");
 
     const addEventsListeners = (() => {
 
@@ -31,11 +41,6 @@ const Controller = (() => {
         const acceptFormButton = document.getElementById('accept-form');
         acceptFormButton.addEventListener('click', createTaskFormCallback);
         acceptFormButton.addEventListener('click', viewControl.closeCreateTaskForm);
-
-        const expandColapseButtonsList = document.querySelectorAll('#expand-colapse');
-        expandColapseButtonsList.forEach( button => {
-            button.addEventListener('click', viewControl.expandColapseTask.bind(this));
-        })
 
     })();
 

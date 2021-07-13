@@ -42,6 +42,7 @@ const ViewController = () => {
     const taskExpandColapse = document.createElement('div');
     taskExpandColapse.classList.add('task--expand-colapse');
     taskExpandColapse.id = 'expand-colapse'
+    taskExpandColapse.addEventListener('click', expandColapseTask.bind(this));
     const expandColapseIcon = document.createElement('i');
     expandColapseIcon.classList.add('fas', 'fa-chevron-down', 'task--button');
     taskExpandColapse.appendChild(expandColapseIcon);
@@ -91,13 +92,7 @@ const ViewController = () => {
     }
   }
 
-  const updateView = (tasksArray) => {
-    const activeView = document.querySelector('div[data-active]');
-    console.log(activeView);
-    //openProject(tasksArray, activeView);
-  }
-
-  const openProject = (tasksArray, project) => {
+  const openTab = (tasksArray, project) => {
     let tasks = tasksArray.filter(task => task.project == project)
     tasks.forEach(task => {
 
@@ -113,6 +108,8 @@ const ViewController = () => {
   const openUpcomingTasks = (tasksArray) => {}
 
   const openPastTasks = (tasksArray) => {}
+
+  const wipeTasksList = () => {}
 
   const openCreateTaskForm = () => {
     let form = document.getElementById('create-task-form');
@@ -133,7 +130,7 @@ const ViewController = () => {
 
   const openEditTaskForm = () => {}
 
-  return {createTask, editTask, deleteTask, expandColapseTask, updateView, openProject, openTodayTasks, openUpcomingTasks, openPastTasks,openCreateTaskForm,closeCreateTaskForm, openEditTaskForm, closeEditTaskForm}
+  return {createTask, editTask, deleteTask, expandColapseTask, openTab, openTodayTasks, openUpcomingTasks, openPastTasks,openCreateTaskForm,closeCreateTaskForm, openEditTaskForm, closeEditTaskForm}
 }
 
 export {ViewController}

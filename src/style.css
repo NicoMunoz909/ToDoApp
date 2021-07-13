@@ -292,6 +292,17 @@ input:focus-visible {
   transition: opacity .4s ease-in;
 }
 
+.projects-header {
+  display: flex;
+  align-items: center;
+}
+
+.round {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+}
+
 ::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
