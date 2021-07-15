@@ -5,92 +5,49 @@
     <script src="https://kit.fontawesome.com/dffe8b7b3b.js" crossorigin="anonymous"></script>
   </head>
   <body>
+    <!--<div class="sidebar" id="sidebar">
 
-    <div class="opaque" id="opaque"></div>
-    <form id="create-task-form" class="create-task-form task expanded">
-      <input type="text" placeholder="Title" class="task--text task--title form--title" id="task-title"></input>
-      <div class="task--project form--project">
-        <i class="fas fa-circle"></i>
-        <p class="task--text">Project:</p>
-        <select id="task-project" class="task--text">
-          <option value="Inbox">Inbox</option>
-        </select>
-      </div>
-      <div class="task--date form--date">
-        <input type="date"  id="task-due-date"></input>
-      </div>
-      
-      <div class="task-description form--description--container">
-        <input type="text" placeholder="Description" class="form--description" id="task-description"></input>
-      </div>
-      
-      <div class="form--priority">
-        <i class="fas fa-flag task--button"></i>
-        <select id="task-priority" class="task--text">
-          <option value="Normal">Normal</option>
-        </select>
-      </div>
-      <i id="close-form" class="far fa-times-circle"></i>
-      <div id="accept-form" class="form--accept"><i class="fas fa-check"></i></div>
+      <button type="button" id="inbox" data-project="Inbox">
+        <i class="fas fa-inbox" ></i>
+        Inbox
+      </button>
 
-    </form>
-
-    <div class="sidebar" id="sidebar">
-
-      <div class="sidebar--button sidebar--create" id="create-task">
-        <i class="fas fa-plus"></i>
-        <p class="sidebar--text button">Create Task</p>
-      </div>
-
-      <div class="sidebar--button" id="inbox" data-name="Inbox">
-        <i class="fas fa-inbox"></i>
-        <p class="sidebar--text">Inbox</p>
-      </div>
-
-      <div class="sidebar--button" id="today-tasks">
+      <button type="button" id="today-tasks">
         <i class="far fa-calendar"></i>
-        <p class="sidebar--text">Today</p>
-      </div>
-      <div class="sidebar--button" id="upcoming-tasks">
-        <i class="far fa-calendar-alt"></i>
-        <p class="sidebar--text">Upcoming</p>
-      </div>
-      <div class="sidebar--button" id="past-tasks">
-        <i class="far fa-calendar-times"></i>
-        <p class="sidebar--text">Past</p>
-      </div>
+        Today
+      </button>
 
-      <hr class="separator">
+      <button type="button" id="upcoming-tasks">
+        <i class="far fa-calendar-alt"></i>
+        Upcoming
+      </button>
+
+      <button type="button" id="past-tasks">
+        <i class="far fa-calendar-times"></i>
+        Past
+      </button>
+
+      <hr class="separator1">
 
       <div class="projects-header">
-        <div class="sidebar--button round" id="add-project">
+        <button type="button" id="add-project">
           <i class="fas fa-plus"></i>
-        </div>
-        <h4>PROJECTS</h4>
+        </button>
+        <h2>PROJECTS</h2>
       </div>
-
-      <!--<div class="sidebar--button">
-        <i class="fas fa-circle"></i>
-        <p class="sidebar--text">Code</p>
-      </div>
-
-      <div class="sidebar--button">
-        <i class="fas fa-circle"></i>
-        <p class="sidebar--text">Music</p>
-      </div>
-
-      <div class="sidebar--button">
-        <i class="fas fa-circle"></i>
-        <p class="sidebar--text">Grossery</p>
-      </div>-->
 
     </div>
 
     <main id="main">
-      <h1>INBOX</h1>
+      <header>
+        <h1>UNLOADED</h1>
+        <button type="button" id="create-task">
+        <i class="fas fa-plus"></i>
+        </button>
+      </header>
       <hr class="separator">
 
-    </main>
+    </main>-->
 
     <script src="./bundle.js"></script>
   </body>
