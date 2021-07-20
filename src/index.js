@@ -1,2 +1,2 @@
 import './style.css'
-import {Controller} from './Controller.js'
+import {Controller} from './controller.js'

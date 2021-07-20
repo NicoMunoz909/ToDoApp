@@ -10,14 +10,7 @@ body {
   background: rgb(47, 47, 47);
   color: white;
   font-family: Arial, Helvetica, sans-serif;
-}
-
-h1 {
-  margin-left: 30px;
-}
-
-h2 {
-  line-height: 20%;
+  overflow: hidden;
 }
 
 .opaque {
@@ -32,62 +25,60 @@ h2 {
 
 .sidebar {
   grid-column: span 2;
-  border-right: solid rgb(78, 78, 78);
+  border-right: solid rgb(34, 34, 34);
   box-shadow: 1px 0px 5px rgb(77, 77, 77),
               -4px 0px 9px -4px rgb(77, 77, 77) inset;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(auto-fill, 40px);
   align-items: center;
+  justify-items: center;
+  padding-top: 3vh;
 }
 
-.sidebar--button {
-  padding: 5px;
-  border-radius: 20px;
-  width: 50%;
+button {
+  background: rgb(47, 47, 47);
+  color: white;
   box-shadow: 1px 1px 2px rgb(32, 32, 32) inset,
-              -1px -1px 1px rgb(110, 109, 109) inset;
-  margin-bottom: 5px;
+  -1px -1px 1px rgb(110, 109, 109) inset;
+  border: none;
+  border-radius: 20px;
+  padding: 1vh;
+  width: 60%;
+  text-align: left;
 }
 
-.sidebar--button:hover {
+button:hover {
   background-color: rgb(77, 75, 75);
   cursor: pointer;
 }
 
-#inbox {
-  margin-bottom: 20px;
-}
-
-.sidebar--create {
-  border-radius: 20px;
-  padding: 5px;
-  margin-top: 10px;
-  margin-bottom: 30px;
-  box-shadow: 2px 2px 2px rgb(32, 32, 32),
-              -1px -1px 1px rgb(110, 109, 109);
-}
-
-.sidebar--text {
-  display: inline;
-  margin-left: 30px;
-}
-
-.button {
-  margin-left: 20px;
-}
-
-.fas, .far, .fab {
-  display: inline;
-  position: absolute;
-}
-
-.separator {
+.separator1 {
   width: 90%;
   border-color: rgb(139, 137, 137);
 }
 
+.separator2 {
+  width: 100%;
+  border-color: rgb(139, 137, 137);
+  grid-column: 4/12;
+  height: fit-content;
+}
+
+h2 {
+  font-size: 2vw;
+}
+
 main {
-  grid-column: span 10;
+  grid-column: 4/12;
+  height: 100%;
+  overflow-y: scroll;
+  padding-right: 1vw;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .task {
@@ -95,7 +86,6 @@ main {
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 50px 120px;
   align-items: center;
-  width: 60%;
   height: 50px;
   margin: auto;
   box-shadow: 1px 1px 2px rgb(32, 32, 32) inset,
@@ -133,8 +123,6 @@ main {
 }
 
 .fa-chevron-down:hover, .fa-chevron-up:hover {
-  text-shadow: 1px 1px 3px white,
-               -1px 1px 3px black;
   cursor: pointer;
 }
 
@@ -176,6 +164,7 @@ main {
   display: block;
   position: initial;
   align-self: flex-start;
+  width: fit-content;
 }
 
 .task--button:hover {
@@ -192,17 +181,6 @@ main {
   background-color: rgb(87, 82, 82);
   border-radius: 20px;
 }
-
-.collapsed {
-  height: 50px;
-  transition: .4s ease-in;
-}
-
-.expanded {
-  height: 170px;
-  transition: .4s ease-out;
-}
-
 
 .create-task-form {
   z-index: 200;
@@ -256,6 +234,17 @@ main {
   color: red;
   cursor: pointer;
 }
+
+.collapsed {
+  height: 50px;
+  transition: .4s ease-in;
+}
+
+.expanded {
+  height: 170px;
+  transition: .4s ease-out;
+}
+
 
 .form--accept {
   grid-column: 12/13;
