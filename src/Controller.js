@@ -8,6 +8,8 @@ const Controller = (() => {
     const viewControl = ViewController();
     const logicControl = TasksObjectController();
 
+    
+
     const updateView = () => {
         const task = viewControl.createTask(logicControl.tasksArray[logicControl.tasksArray.length -1]);
         document.getElementById('main').appendChild(task);

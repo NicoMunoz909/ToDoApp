@@ -8,7 +8,7 @@
 
     <div class="opaque" id="opaque"></div>
     <form id="create-task-form" class="create-task-form task expanded">
-      <input type="text" placeholder="Title" class="task--text task--title form--title" id="task-title"></input>
+      <input type="text" placeholder="Title" class="task--text task--title form--title" id="task-title" required></input>
       <div class="task--project form--project">
         <i class="fas fa-circle"></i>
         <p class="task--text">Project:</p>
@@ -17,7 +17,7 @@
         </select>
       </div>
       <div class="task--date form--date">
-        <input type="date"  id="task-due-date"></input>
+        <input type="date"  id="task-due-date" required></input>
       </div>
       
       <div class="task-description form--description--container">

@@ -178,6 +178,12 @@ main {
   align-self: flex-start;
 }
 
+.task--button:hover {
+  color: black;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
 ::-webkit-scrollbar {
   background-color: rgb(47, 47, 47);
 }
@@ -260,6 +266,7 @@ main {
   justify-self: flex-end;
   margin-bottom: 10px;
   margin-right: 10px;
+  display: block;
 }
 
 .form--accept:hover {

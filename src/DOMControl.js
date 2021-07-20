@@ -61,10 +61,13 @@ const ViewController = () => {
 
     const priorityButton = document.createElement('i');
     priorityButton.classList.add('fas', 'fa-flag', 'task--button');
+    priorityButton.addEventListener('click', editPriority.bind(this));
     const editButton = document.createElement('i');
     editButton.classList.add('fas', 'fa-pen', 'task--button');
+    editButton.addEventListener('click', editTitleAndDescrition.bind(this));
     const deleteButton = document.createElement('i');
     deleteButton.classList.add('fas', 'fa-trash-alt', 'task--button');
+    deleteButton.addEventListener('click', deleteTask.bind(this));
     taskContainer.appendChild(priorityButton);
     taskContainer.appendChild(editButton);
     taskContainer.appendChild(deleteButton);
@@ -72,9 +75,13 @@ const ViewController = () => {
     return taskContainer;
   }
 
-  const editTask = () => {}
+  const editTitleAndDescrition = () => {}
 
   const deleteTask = () => {}
+
+  function editPriority() {
+    console.log(e)
+  }
 
   const expandColapseTask = (mouseEvent) => {
     const task = mouseEvent.path[2];
@@ -130,7 +137,7 @@ const ViewController = () => {
 
   const openEditTaskForm = () => {}
 
-  return {createTask, editTask, deleteTask, expandColapseTask, openTab, openTodayTasks, openUpcomingTasks, openPastTasks,openCreateTaskForm,closeCreateTaskForm, openEditTaskForm, closeEditTaskForm}
+  return {createTask, editTitleAndDescrition, editPriority, deleteTask, expandColapseTask, openTab, openTodayTasks, openUpcomingTasks, openPastTasks,openCreateTaskForm,closeCreateTaskForm, openEditTaskForm, closeEditTaskForm}
 }
 
 export {ViewController}
