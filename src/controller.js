@@ -13,6 +13,43 @@ const Controller = (() => {
     model.newTask('FFF VI', 'ADICTED', '2021-20-7', 'VERY HIGH', 'Inbox');
     model.newTask('FFF VI', 'ADICTED', '2021-20-7', 'VERY HIGH', 'Inbox');*/
 
+    function markComplete() {
+        const taskElement = this[0];
+        const taskObject = this[1];
+        taskElement.classList.add('completed')
+        taskObject.isCompleted = true;
+        console.log(taskElement);
+        console.log(taskObject);
+    }
+
+    function changePriority() {
+        const taskElement = this[0];
+        const taskObject = this[1];
+        //rest of functiom
+    }
+
+    function editTaskInfo() {}
+
+    function deleteTask() {}
+
+
+    const addTaskEventListeners = (taskElement, taskObject) => {
+
+        const argsArray = [taskElement, taskObject];
+
+        const checkbox = taskElement.querySelector('#checkbox');
+        checkbox.addEventListener('click', markComplete.bind(argsArray))
+
+        const priority = taskElement.querySelector('#priority');
+        priority.addEventListener('click', changePriority.bind(argsArray));
+
+        const edit = taskElement.querySelector('#edit');
+        edit.addEventListener('click', editTaskInfo.bind(argsArray));
+
+        const deleteButton = taskElement.querySelector('#delete');
+        deleteButton.addEventListener('click', deleteTask.bind(argsArray));
+    }
+
     function createTask() {
 
         const title = document.getElementById('task-title').value;
@@ -21,9 +58,10 @@ const Controller = (() => {
         const date = document.getElementById('task-date').value;
         const priority = document.getElementById('task-priority').value;
 
-        model.newTask(title,description,date,priority,project);
-        view.wipeContent();
-        view.loadTasks(model.taskList["Inbox"]);
+        const taskObject = model.newTask(title,description,date,priority,project);
+        const taskElement = view.createTask(taskObject);
+        addTaskEventListeners(taskElement,taskObject);
+        view.appendTask(taskElement);
     }
 
     view.loadSidebar();

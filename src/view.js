@@ -31,6 +31,7 @@ const View = () => {
     
         const taskCheckbox = document.createElement('div');
         taskCheckbox.classList.add('task--checkbox');
+        taskCheckbox.id = 'checkbox';
         const checkIcon = document.createElement('i');
         checkIcon.classList.add('fas', 'fa-check');
         taskCheckbox.appendChild(checkIcon);
@@ -45,6 +46,7 @@ const View = () => {
         taskProject.classList.add('task--project');
         const projectIcon = document.createElement('i');
         projectIcon.classList.add('fas', 'fa-circle');
+        projectIcon.id = 'project';
         const projectName = document.createElement('p');
         projectName.classList.add('task--text');
         projectName.textContent = task.project;
@@ -56,6 +58,7 @@ const View = () => {
         taskDate.classList.add('task--date');
         const dateIcon = document.createElement('i');
         dateIcon.classList.add('far', 'fa-calendar-alt');
+        dateIcon.id = 'date';
         const date = document.createElement('p');
         date.classList.add('task--text');
         date.textContent = task.date;
@@ -85,18 +88,23 @@ const View = () => {
     
         const priorityButton = document.createElement('i');
         priorityButton.classList.add('fas', 'fa-flag', 'task--button');
-        //priorityButton.addEventListener('click', editPriority.bind(this));
+        priorityButton.id = 'priority';
         const editButton = document.createElement('i');
         editButton.classList.add('fas', 'fa-pen', 'task--button');
-        //editButton.addEventListener('click', editTitleAndDescrition.bind(this));
+        editButton.id = 'edit';
         const deleteButton = document.createElement('i');
         deleteButton.classList.add('fas', 'fa-trash-alt', 'task--button');
-        //deleteButton.addEventListener('click', deleteTask.bind(this));
+        deleteButton.id = 'delete';
         taskContainer.appendChild(priorityButton);
         taskContainer.appendChild(editButton);
         taskContainer.appendChild(deleteButton);
     
         return taskContainer;
+    }
+
+    const appendTask = (task) => {
+        const container = document.getElementById('tasks-container');
+        container.appendChild(task);
     }
     
     const loadSidebar = () => {
@@ -195,14 +203,14 @@ const View = () => {
 
     const loadTasks = (array) => {
 
-        if(array.length == 0) {
+        /*if(array.length == 0) {
             const text = document.createElement('p');
             text.textContent = "Nothing to do here";
             
             const container = document.getElementById('tasks-container');
             container.appendChild(text)
             return
-        }
+        }*/
         
         array.forEach(task => {
             const element = createTask(task);
@@ -225,7 +233,7 @@ const View = () => {
         opaque.classList.remove('opaque--visible');
     }
 
-    return {wipeContent, loadSidebar, loadMain, loadTasks, openCreateTaskForm, closeCreateTaskForm}
+    return {wipeContent, createTask, appendTask, loadSidebar, loadMain, loadTasks, openCreateTaskForm, closeCreateTaskForm}
 
 }
 
