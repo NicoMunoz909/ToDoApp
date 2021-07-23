@@ -11,15 +11,17 @@ const Controller = (() => {
     model.newTask('FFF VI', 'ADICTED', '2021-20-7', 'VERY HIGH', 'Inbox');
     model.newTask('FFF VI', 'ADICTED', '2021-20-7', 'VERY HIGH', 'Inbox');
     model.newTask('FFF VI', 'ADICTED', '2021-20-7', 'VERY HIGH', 'Inbox');
-    model.newTask('FFF VI', 'ADICTED', '2021-20-7', 'VERY HIGH', 'Inbox');*/
+    model.newTask('FFF VI', 'ADICTEDADICTEDADICTEDADICTEDADICTEDADICTEDADICTEDADICTEDADICTEDADICTED', '2021-20-7', 'VERY HIGH', 'Inbox');*/
 
-    function markComplete() {
+    function checkboxCallback() {
         const taskElement = this[0];
         const taskObject = this[1];
-        taskElement.classList.add('completed')
-        taskObject.isCompleted = true;
-        console.log(taskElement);
-        console.log(taskObject);
+        view.checkUncheckTask(taskElement, taskObject.isCompleted);
+        if(!taskObject.isCompleted){
+            taskObject.isCompleted = true;
+        } else {
+            taskObject.isCompleted = false;
+        }
     }
 
     function changePriority() {
@@ -38,7 +40,7 @@ const Controller = (() => {
         const argsArray = [taskElement, taskObject];
 
         const checkbox = taskElement.querySelector('#checkbox');
-        checkbox.addEventListener('click', markComplete.bind(argsArray))
+        checkbox.addEventListener('click', checkboxCallback.bind(argsArray))
 
         const priority = taskElement.querySelector('#priority');
         priority.addEventListener('click', changePriority.bind(argsArray));

@@ -1,8 +1,8 @@
 const View = () => {
 
-    const expandColapseTask = (mouseEvent) => {
-        const task = mouseEvent.path[2];
-        const button = mouseEvent.srcElement;
+    function expandColapseTask() {
+        const task = this;
+        const button = task.querySelector('#expand-colapse-icon')
         if (task.classList.contains('collapsed')) {
           button.classList.add('fa-chevron-up');
           button.classList.remove('fa-chevron-down');
@@ -30,10 +30,11 @@ const View = () => {
         taskContainer.id = "task";
     
         const taskCheckbox = document.createElement('div');
-        taskCheckbox.classList.add('task--checkbox');
+        taskCheckbox.classList.add('task--checkbox__incomplete');
         taskCheckbox.id = 'checkbox';
         const checkIcon = document.createElement('i');
         checkIcon.classList.add('fas', 'fa-check');
+        checkIcon.id = 'check-icon';
         taskCheckbox.appendChild(checkIcon);
         taskContainer.appendChild(taskCheckbox);
     
@@ -69,9 +70,10 @@ const View = () => {
         const taskExpandColapse = document.createElement('div');
         taskExpandColapse.classList.add('task--expand-colapse');
         taskExpandColapse.id = 'expand-colapse'
-        taskExpandColapse.addEventListener('click', expandColapseTask.bind(this));
+        taskExpandColapse.addEventListener('click', expandColapseTask.bind(taskContainer));
         const expandColapseIcon = document.createElement('i');
         expandColapseIcon.classList.add('fas', 'fa-chevron-down', 'task--button');
+        expandColapseIcon.id = 'expand-colapse-icon';
         taskExpandColapse.appendChild(expandColapseIcon);
         taskContainer.appendChild(taskExpandColapse);
     
@@ -218,6 +220,20 @@ const View = () => {
         });
     }
 
+    const checkUncheckTask = (taskElement, completed) => {
+        const checkbox = taskElement.querySelector('#checkbox');
+        if(!completed) {
+            taskElement.classList.add('completed');
+            checkbox.classList.remove('task--checkbox__incomplete');
+            checkbox.classList.add('task--checkbox__complete');
+        } else {
+            taskElement.classList.remove('completed');
+            checkbox.classList.add('task--checkbox__incomplete');
+            checkbox.classList.remove('task--checkbox__complete');
+        }
+        
+    }
+
     const openCreateTaskForm = () => {
         let form = document.getElementById('create-task-form');
         let opaque = document.getElementById('opaque');
@@ -233,7 +249,7 @@ const View = () => {
         opaque.classList.remove('opaque--visible');
     }
 
-    return {wipeContent, createTask, appendTask, loadSidebar, loadMain, loadTasks, openCreateTaskForm, closeCreateTaskForm}
+    return {wipeContent, createTask, appendTask, loadSidebar, loadMain, loadTasks, checkUncheckTask, openCreateTaskForm, closeCreateTaskForm}
 
 }
 

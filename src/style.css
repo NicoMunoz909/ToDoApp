@@ -96,7 +96,7 @@ header {
   margin-bottom: 20px;
 } 
 
-.task--checkbox {
+.task--checkbox__incomplete {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -108,10 +108,32 @@ header {
   color: rgb(47, 47, 47);
 }
 
-.task--checkbox:hover {
+.task--checkbox__incomplete:hover {
   color: white;
   transition: 0.3s;
   cursor: pointer;
+}
+
+.task--checkbox__complete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: solid 2px rgb(95, 95, 95);
+  grid-column: span 1;
+  color: white;
+}
+
+.task--checkbox__complete:hover {
+  color: red;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.task--checkbox__complete > i::before {
+  content: "\f00d"
 }
 
 .task--expand-colapse{
@@ -173,12 +195,17 @@ header {
   cursor: pointer;
 }
 
-::-webkit-scrollbar {
-  background-color: rgb(47, 47, 47);
+.completed {
+  color: white;
+  background-color: rgb(83, 80, 80);
+}
+
+::-webkit-scrollbar, ::-webkit-scrollbar-corner {
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(87, 82, 82);
+  background-color: rgb(255, 247, 247);
   border-radius: 20px;
 }
 
