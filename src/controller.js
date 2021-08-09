@@ -27,7 +27,6 @@ const Controller = (() => {
     function changePriority() {
         const taskElement = this[0];
         const taskObject = this[1];
-        //rest of functiom
     }
 
     function editTaskInfo() {}

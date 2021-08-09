@@ -78,7 +78,32 @@ const View = () => {
         taskContainer.appendChild(taskExpandColapse);
     
         const taskPriority = document.createElement('div');
-        taskPriority.classList.add('task--priority');
+        switch (task.priority) {
+            case "Very Low":
+                taskPriority.classList.add('task--priority__very-low');
+                break;
+            case "Low":
+                taskPriority.classList.add('task--priority__low');
+                break;
+            case "Normal":
+                taskPriority.classList.add('task--priority__normal');
+                break;
+            case "High":
+                taskPriority.classList.add('task--priority__high');
+                break;
+            case "Very High":
+                taskPriority.classList.add('task--priority__very-high');
+                break;
+            default:
+                break;
+        }
+        const taskPrioritySelect = document.createElement('select');
+        taskPrioritySelect.classList.add('task--priority__selector');
+        const optionNormal = document.createElement('option');
+        optionNormal.value = 'Normal';
+        optionNormal.textContent = 'Normal';
+        taskPrioritySelect.appendChild(optionNormal);
+        taskContainer.appendChild(taskPrioritySelect);
         taskContainer.appendChild(taskPriority);
     
         const taskDescription = document.createElement('div');

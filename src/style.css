@@ -132,10 +132,6 @@ header {
   cursor: pointer;
 }
 
-.task--checkbox__complete > i::before {
-  content: "\f00d"
-}
-
 .task--expand-colapse{
   grid-column: 11/12;
 }
@@ -165,10 +161,51 @@ header {
   grid-column: span 3;
 }
 
-.task--priority {
+.task--priority__selector {
+  grid-column: 8/10;
+  grid-row: 2/3;
+}
+
+.task--priority__very-high {
   height: 100%;
   width: 100%;
   background: linear-gradient(90deg, rgb(47, 47, 47) 0%, rgba(230,20,20,1) 100%);
+  grid-column: 12/14;
+  grid-row: 1/3;
+  z-index: -100;
+}
+
+.task--priority__high {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, rgb(47, 47, 47) 0%, rgb(226, 92, 92) 100%);
+  grid-column: 12/14;
+  grid-row: 1/3;
+  z-index: -100;
+}
+
+.task--priority__normal {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, rgb(47, 47, 47) 0%, rgb(47, 47, 47) 100%);
+  grid-column: 12/14;
+  grid-row: 1/3;
+  z-index: -100;
+}
+
+.task--priority__low {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, rgb(47, 47, 47) 0%, rgb(45, 230, 20) 100%);
+  grid-column: 12/14;
+  grid-row: 1/3;
+  z-index: -100;
+}
+
+.task--priority__very-low {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, rgb(47, 47, 47) 0%, rgb(8, 80, 6) 100%);
   grid-column: 12/14;
   grid-row: 1/3;
   z-index: -100;
