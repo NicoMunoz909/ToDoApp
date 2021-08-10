@@ -24,9 +24,49 @@ const Controller = (() => {
         }
     }
 
-    function changePriority() {
+    function setPriorityVeryLow() {
         const taskElement = this[0];
         const taskObject = this[1];
+        const priorityColor = taskElement.querySelector('#priority')
+        priorityColor.classList.remove('task--priority__very-high', 'task--priority__high', 'task--priority__normal', 'task--priority__low', 'task--priority__very-low');
+        priorityColor.classList.add('task--priority__very-low');
+        taskObject.priority = "Very Low";
+    }
+
+    function setPriorityLow() {
+        const taskElement = this[0];
+        const taskObject = this[1];
+        const priorityColor = taskElement.querySelector('#priority')
+        priorityColor.classList.remove('task--priority__very-high', 'task--priority__high', 'task--priority__normal', 'task--priority__low', 'task--priority__very-low');
+        priorityColor.classList.add('task--priority__low');
+        taskObject.priority = "Low";
+    }
+
+    function setPriorityNormal() {
+        const taskElement = this[0];
+        const taskObject = this[1];
+        const priorityColor = taskElement.querySelector('#priority')
+        priorityColor.classList.remove('task--priority__very-high', 'task--priority__high', 'task--priority__normal', 'task--priority__low', 'task--priority__very-low');
+        priorityColor.classList.add('task--priority__normal');
+        taskObject.priority = "Normal";
+    }
+
+    function setPriorityHigh() {
+        const taskElement = this[0];
+        const taskObject = this[1];
+        const priorityColor = taskElement.querySelector('#priority')
+        priorityColor.classList.remove('task--priority__very-high', 'task--priority__high', 'task--priority__normal', 'task--priority__low', 'task--priority__very-low');
+        priorityColor.classList.add('task--priority__high');
+        taskObject.priority = "High";
+    }
+
+    function setPriorityVeryHigh() {
+        const taskElement = this[0];
+        const taskObject = this[1];
+        const priorityColor = taskElement.querySelector('#priority')
+        priorityColor.classList.remove('task--priority__very-high', 'task--priority__high', 'task--priority__normal', 'task--priority__low', 'task--priority__very-low');
+        priorityColor.classList.add('task--priority__very-high');
+        taskObject.priority = "Very High";
     }
 
     function editTaskInfo() {}
@@ -41,8 +81,20 @@ const Controller = (() => {
         const checkbox = taskElement.querySelector('#checkbox');
         checkbox.addEventListener('click', checkboxCallback.bind(argsArray))
 
-        const priority = taskElement.querySelector('#priority');
-        priority.addEventListener('click', changePriority.bind(argsArray));
+        const priorityVeryLow = taskElement.querySelector('#priority-vlow');
+        priorityVeryLow.addEventListener('click', setPriorityVeryLow.bind(argsArray));
+
+        const priorityLow = taskElement.querySelector('#priority-low');
+        priorityLow.addEventListener('click', setPriorityLow.bind(argsArray));
+
+        const priorityNormal = taskElement.querySelector('#priority-normal');
+        priorityNormal.addEventListener('click', setPriorityNormal.bind(argsArray));
+
+        const priorityHigh = taskElement.querySelector('#priority-high');
+        priorityHigh.addEventListener('click', setPriorityHigh.bind(argsArray));
+
+        const priorityVeryHigh = taskElement.querySelector('#priority-vhigh');
+        priorityVeryHigh.addEventListener('click', setPriorityVeryHigh.bind(argsArray));
 
         const edit = taskElement.querySelector('#edit');
         edit.addEventListener('click', editTaskInfo.bind(argsArray));

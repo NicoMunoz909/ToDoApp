@@ -161,9 +161,30 @@ header {
   grid-column: span 3;
 }
 
-.task--priority__selector {
-  grid-column: 8/10;
-  grid-row: 2/3;
+.task--priority-edit {
+  display: flex;
+  align-self: flex-start;
+  flex-direction: column;
+}
+
+.task--priority-menu {
+  margin-top: 10px;
+}
+
+.priority--option {
+  font-size: 11px;
+  border-radius: 20px;
+  padding-left: 3px;
+  margin-bottom: 3px;
+}
+
+.priority--option:hover {
+  cursor: pointer;
+  transform: translateX(5px);
+}
+
+.hidden {
+  display: none;
 }
 
 .task--priority__very-high {

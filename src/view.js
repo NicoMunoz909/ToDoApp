@@ -13,7 +13,12 @@ const View = () => {
           button.classList.remove('fa-chevron-up');
           task.classList.remove('expanded');
           task.classList.add('collapsed');
+          task.querySelector('#priority-menu').classList.add('hidden');
         }
+    }
+
+    function togglePriorityChangeMenu() {
+        this.classList.toggle('hidden');
     }
 
     const wipeContent = () => {
@@ -97,13 +102,7 @@ const View = () => {
             default:
                 break;
         }
-        const taskPrioritySelect = document.createElement('select');
-        taskPrioritySelect.classList.add('task--priority__selector');
-        const optionNormal = document.createElement('option');
-        optionNormal.value = 'Normal';
-        optionNormal.textContent = 'Normal';
-        taskPrioritySelect.appendChild(optionNormal);
-        taskContainer.appendChild(taskPrioritySelect);
+        taskPriority.id = 'priority';
         taskContainer.appendChild(taskPriority);
     
         const taskDescription = document.createElement('div');
@@ -113,16 +112,67 @@ const View = () => {
         taskDescription.appendChild(description);
         taskContainer.appendChild(taskDescription);
     
+        const priorityEdit = document.createElement('div');
+        priorityEdit.classList.add('task--priority-edit');
+
         const priorityButton = document.createElement('i');
         priorityButton.classList.add('fas', 'fa-flag', 'task--button');
-        priorityButton.id = 'priority';
+
+        const priorityMenu = document.createElement('div');
+        priorityMenu.classList.add('task--priority-menu', 'hidden');
+        priorityMenu.id = 'priority-menu';
+
+        const prioritySelectVeryLow = document.createElement('div');
+        prioritySelectVeryLow.classList.add('priority--option');
+        prioritySelectVeryLow.id = 'priority-vlow';
+        prioritySelectVeryLow.dataset.value = 'Very Low';
+        prioritySelectVeryLow.style = 'background: linear-gradient(270deg, rgb(47, 47, 47) 15%, rgb(8, 80, 6) 100%)';
+        prioritySelectVeryLow.innerHTML = 'VL';
+
+        const prioritySelectLow = document.createElement('div');
+        prioritySelectLow.classList.add('priority--option');
+        prioritySelectLow.id = 'priority-low';
+        prioritySelectLow.dataset.value = 'Low';
+        prioritySelectLow.style = 'background: linear-gradient(270deg, rgb(47, 47, 47) 15%, rgb(45, 230, 20) 100%)';
+        prioritySelectLow.innerHTML = 'L';
+
+        const prioritySelectNormal = document.createElement('div');
+        prioritySelectNormal.classList.add('priority--option');
+        prioritySelectNormal.id = 'priority-normal';
+        prioritySelectNormal.dataset.value = 'Normal';
+        prioritySelectNormal.innerHTML = 'N';
+
+        const prioritySelectHigh = document.createElement('div');
+        prioritySelectHigh.classList.add('priority--option');
+        prioritySelectHigh.id = 'priority-high';
+        prioritySelectHigh.dataset.value = 'High';
+        prioritySelectHigh.style = 'background: linear-gradient(270deg, rgb(47, 47, 47) 15%, rgb(226, 92, 92) 100%)';
+        prioritySelectHigh.innerHTML = 'H';
+        
+        const prioritySelectVeryHigh = document.createElement('div');
+        prioritySelectVeryHigh.classList.add('priority--option');
+        prioritySelectVeryHigh.id = 'priority-vhigh';
+        prioritySelectVeryHigh.dataset.value = 'Very High';
+        prioritySelectVeryHigh.style = 'background: linear-gradient(270deg, rgb(47, 47, 47) 15%, rgba(230,20,20,1) 100%)';
+        prioritySelectVeryHigh.innerHTML = 'VH'; 
+
+        priorityEdit.appendChild(priorityButton);
+        priorityMenu.appendChild(prioritySelectVeryLow);
+        priorityMenu.appendChild(prioritySelectLow);
+        priorityMenu.appendChild(prioritySelectNormal);
+        priorityMenu.appendChild(prioritySelectHigh);
+        priorityMenu.appendChild(prioritySelectVeryHigh);
+        priorityEdit.appendChild(priorityMenu);
+        priorityButton.addEventListener('click', togglePriorityChangeMenu.bind(priorityMenu));
+
+
         const editButton = document.createElement('i');
         editButton.classList.add('fas', 'fa-pen', 'task--button');
         editButton.id = 'edit';
         const deleteButton = document.createElement('i');
         deleteButton.classList.add('fas', 'fa-trash-alt', 'task--button');
         deleteButton.id = 'delete';
-        taskContainer.appendChild(priorityButton);
+        taskContainer.appendChild(priorityEdit);
         taskContainer.appendChild(editButton);
         taskContainer.appendChild(deleteButton);
     
