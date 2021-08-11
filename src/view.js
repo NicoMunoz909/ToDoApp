@@ -21,6 +21,28 @@ const View = () => {
         this.classList.toggle('hidden');
     }
 
+    const openTaskEdition = (element, object) => {
+        const editButton = element.querySelector('#edit');
+        editButton.style = 'color: black';
+        const titleEdit = element.querySelector('#title-edit');
+        titleEdit.classList.remove('hidden');
+        titleEdit.value = object.title;
+        const descriptionEdit = element.querySelector('#description-edit');
+        descriptionEdit.classList.remove('hidden');
+        descriptionEdit.value = object.description;
+    }
+
+    const closeTaskEdition = (element, object) => {
+        const editButton = element.querySelector('#edit');
+        editButton.style = '';
+        const titleEdit = element.querySelector('#title-edit');
+        titleEdit.classList.add('hidden');
+        const descriptionEdit = element.querySelector('#description-edit');
+        descriptionEdit.classList.add('hidden');
+        element.querySelector('#title').textContent = object.title;
+        element.querySelector('#description').textContent = object.description;
+    }
+
     const wipeContent = () => {
         const container = document.getElementById('tasks-container');
         const childrenArray = Array.from(container.childNodes);
@@ -43,10 +65,19 @@ const View = () => {
         taskCheckbox.appendChild(checkIcon);
         taskContainer.appendChild(taskCheckbox);
     
+        const taskTitleContainer = document.createElement('div');
+        taskTitleContainer.classList.add('task--title');
         const taskTitle = document.createElement('p');
-        taskTitle.classList.add('task--text', 'task--title');
+        taskTitle.id = 'title';
+        taskTitle.classList.add('task--text');
         taskTitle.textContent = task.title;
-        taskContainer.appendChild(taskTitle);
+        const taskTitleEdit = document.createElement('input');
+        taskTitleEdit.type = 'text';
+        taskTitleEdit.id = 'title-edit';
+        taskTitleEdit.classList.add('task--title', 'task--edit', 'hidden');
+        taskTitleContainer.appendChild(taskTitle);
+        taskTitleContainer.appendChild(taskTitleEdit);
+        taskContainer.appendChild(taskTitleContainer);
     
         const taskProject = document.createElement('div');
         taskProject.classList.add('task--project');
@@ -105,12 +136,18 @@ const View = () => {
         taskPriority.id = 'priority';
         taskContainer.appendChild(taskPriority);
     
-        const taskDescription = document.createElement('div');
-        taskDescription.classList.add('task-description');
+        const taskDescriptionContainer = document.createElement('div');
+        taskDescriptionContainer.classList.add('task-description');
         const description = document.createElement('p');
+        description.id = 'description';
         description.textContent = task.description;
-        taskDescription.appendChild(description);
-        taskContainer.appendChild(taskDescription);
+        const descriptionEdit = document.createElement('input');
+        descriptionEdit.type = 'text';
+        descriptionEdit.classList.add('task--edit', 'task--description', 'hidden');
+        descriptionEdit.id = 'description-edit';
+        taskDescriptionContainer.appendChild(description);
+        taskDescriptionContainer.appendChild(descriptionEdit);
+        taskContainer.appendChild(taskDescriptionContainer);
     
         const priorityEdit = document.createElement('div');
         priorityEdit.classList.add('task--priority-edit');
@@ -157,11 +194,11 @@ const View = () => {
         prioritySelectVeryHigh.innerHTML = 'VH'; 
 
         priorityEdit.appendChild(priorityButton);
-        priorityMenu.appendChild(prioritySelectVeryLow);
-        priorityMenu.appendChild(prioritySelectLow);
-        priorityMenu.appendChild(prioritySelectNormal);
-        priorityMenu.appendChild(prioritySelectHigh);
         priorityMenu.appendChild(prioritySelectVeryHigh);
+        priorityMenu.appendChild(prioritySelectHigh);
+        priorityMenu.appendChild(prioritySelectNormal);
+        priorityMenu.appendChild(prioritySelectLow);
+        priorityMenu.appendChild(prioritySelectVeryLow);
         priorityEdit.appendChild(priorityMenu);
         priorityButton.addEventListener('click', togglePriorityChangeMenu.bind(priorityMenu));
 
@@ -324,7 +361,7 @@ const View = () => {
         opaque.classList.remove('opaque--visible');
     }
 
-    return {wipeContent, createTask, appendTask, loadSidebar, loadMain, loadTasks, checkUncheckTask, openCreateTaskForm, closeCreateTaskForm}
+    return {wipeContent, createTask, appendTask, loadSidebar, loadMain, loadTasks, checkUncheckTask, openTaskEdition, closeTaskEdition, openCreateTaskForm, closeCreateTaskForm}
 
 }
 

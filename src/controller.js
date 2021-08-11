@@ -6,13 +6,9 @@ const Controller = (() => {
     const view = View();
     const model = Model();
 
-    /*model.newTask('FFF VI', 'ADICTED', '2021-20-7', 'VERY HIGH', 'Inbox');
-    model.newTask('FFF VI', 'ADICTED', '2021-20-7', 'VERY HIGH', 'Inbox');
-    model.newTask('FFF VI', 'ADICTED', '2021-20-7', 'VERY HIGH', 'Inbox');
-    model.newTask('FFF VI', 'ADICTED', '2021-20-7', 'VERY HIGH', 'Inbox');
-    model.newTask('FFF VI', 'ADICTED', '2021-20-7', 'VERY HIGH', 'Inbox');
-    model.newTask('FFF VI', 'ADICTEDADICTEDADICTEDADICTEDADICTEDADICTEDADICTEDADICTEDADICTEDADICTED', '2021-20-7', 'VERY HIGH', 'Inbox');*/
+    let editing = true;
 
+  
     function checkboxCallback() {
         const taskElement = this[0];
         const taskObject = this[1];
@@ -69,7 +65,21 @@ const Controller = (() => {
         taskObject.priority = "Very High";
     }
 
-    function editTaskInfo() {}
+    function toggleTaskEdition() {
+        const taskElement = this[0];
+        const taskObject = this[1];
+        if(editing) {
+            view.openTaskEdition(taskElement, taskObject);
+            editing = false;
+        }
+        else {
+            taskObject.title = taskElement.querySelector('#title-edit').value;
+            taskObject.description = taskElement.querySelector('#description-edit').value;
+            view.closeTaskEdition(taskElement, taskObject);
+            editing = true;
+            console.log(taskObject);
+        }
+    }
 
     function deleteTask() {}
 
@@ -97,7 +107,7 @@ const Controller = (() => {
         priorityVeryHigh.addEventListener('click', setPriorityVeryHigh.bind(argsArray));
 
         const edit = taskElement.querySelector('#edit');
-        edit.addEventListener('click', editTaskInfo.bind(argsArray));
+        edit.addEventListener('click', toggleTaskEdition.bind(argsArray));
 
         const deleteButton = taskElement.querySelector('#delete');
         deleteButton.addEventListener('click', deleteTask.bind(argsArray));

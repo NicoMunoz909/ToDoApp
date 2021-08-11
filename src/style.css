@@ -146,6 +146,7 @@ header {
 
 .task--title {
   grid-column: span 3;
+  position: relative;
 }
 
 .task--project {
@@ -238,6 +239,7 @@ header {
   overflow-y: scroll;
   margin-bottom: 10px;
   margin-right: 20px;
+  position: relative;
 }
 
 .task--button {
@@ -251,6 +253,16 @@ header {
   color: black;
   transition: 0.2s;
   cursor: pointer;
+}
+
+.task--edit {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  box-shadow: 1px 1px 2px rgb(32, 32, 32) inset,
+              -1px -1px 1px rgb(110, 109, 109) inset;
+  width: 90%;
+  height: 100%;
 }
 
 .completed {
