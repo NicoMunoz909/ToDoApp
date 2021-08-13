@@ -10,7 +10,12 @@ const Model = () => {
     return task
   }
 
-  return {taskList, newTask}
+  const deleteTask = (task) => {
+    const taskIndex = taskList[task.project].indexOf(task);
+    taskList[task.project].splice(taskIndex,1);
+  }
+
+  return {taskList, newTask, deleteTask}
 }
 
 export {Model}

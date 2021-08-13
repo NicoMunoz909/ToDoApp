@@ -81,7 +81,12 @@ const Controller = (() => {
         }
     }
 
-    function deleteTask() {}
+    function deleteTask() {
+        const taskElement = this[0];
+        const taskObject = this[1];
+        view.deleteTask(taskElement);
+        model.deleteTask(taskObject);
+    }
 
 
     const addTaskEventListeners = (taskElement, taskObject) => {

@@ -43,6 +43,11 @@ const View = () => {
         element.querySelector('#description').textContent = object.description;
     }
 
+    const deleteTask = (task) => {
+        const tasksContainer = document.getElementById('tasks-container');
+        tasksContainer.removeChild(task);
+    }
+
     const wipeContent = () => {
         const container = document.getElementById('tasks-container');
         const childrenArray = Array.from(container.childNodes);
@@ -361,7 +366,7 @@ const View = () => {
         opaque.classList.remove('opaque--visible');
     }
 
-    return {wipeContent, createTask, appendTask, loadSidebar, loadMain, loadTasks, checkUncheckTask, openTaskEdition, closeTaskEdition, openCreateTaskForm, closeCreateTaskForm}
+    return {wipeContent, createTask, appendTask, loadSidebar, loadMain, loadTasks, checkUncheckTask, openTaskEdition, closeTaskEdition, openCreateTaskForm, closeCreateTaskForm, deleteTask}
 
 }
 
