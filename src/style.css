@@ -342,6 +342,16 @@ header {
   transition: .4s ease-out;
 }
 
+.select--small {
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+.select--small:hover {
+  cursor: pointer;
+  color: black;
+}
+
 
 .form--accept {
   grid-column: 12/13;

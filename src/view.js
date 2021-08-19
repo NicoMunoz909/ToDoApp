@@ -30,6 +30,10 @@ const View = () => {
         const descriptionEdit = element.querySelector('#description-edit');
         descriptionEdit.classList.remove('hidden');
         descriptionEdit.value = object.description;
+        const projectEdit = element.querySelector('#project-edit');
+        projectEdit.classList.remove('hidden');
+        const dateEdit = element.querySelector('#date-edit');
+        dateEdit.classList.remove('hidden');
     }
 
     const closeTaskEdition = (element, object) => {
@@ -41,6 +45,10 @@ const View = () => {
         descriptionEdit.classList.add('hidden');
         element.querySelector('#title').textContent = object.title;
         element.querySelector('#description').textContent = object.description;
+        const projectEdit = element.querySelector('#project-edit');
+        projectEdit.classList.add('hidden');
+        const dateEdit = element.querySelector('#date-edit');
+        dateEdit.classList.add('hidden');
     }
 
     const deleteTask = (task) => {
@@ -92,8 +100,13 @@ const View = () => {
         const projectName = document.createElement('p');
         projectName.classList.add('task--text');
         projectName.textContent = task.project;
+        const projectEdit = document.createElement('i');
+        projectEdit.id = 'project-edit';
+        projectEdit.classList.add('fas', 'fa-chevron-down', 'select--small', 'hidden');
+        projectEdit.addEventListener('click', openProjectSelect.bind(taskProject));
         taskProject.appendChild(projectIcon);
         taskProject.appendChild(projectName);
+        taskProject.appendChild(projectEdit);
         taskContainer.appendChild(taskProject);
     
         const taskDate = document.createElement('div');
@@ -104,8 +117,12 @@ const View = () => {
         const date = document.createElement('p');
         date.classList.add('task--text');
         date.textContent = task.date;
+        const dateEdit = document.createElement('i');
+        dateEdit.id = 'date-edit';
+        dateEdit.classList.add('fas', 'fa-chevron-down', 'select--small', 'hidden');
         taskDate.appendChild(dateIcon);
         taskDate.appendChild(date);
+        taskDate.appendChild(dateEdit);
         taskContainer.appendChild(taskDate);
     
         const taskExpandColapse = document.createElement('div');
