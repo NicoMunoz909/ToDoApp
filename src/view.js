@@ -34,6 +34,10 @@ const View = () => {
         projectEdit.classList.remove('hidden');
         const dateEdit = element.querySelector('#date-edit');
         dateEdit.classList.remove('hidden');
+        const saveButton = element.querySelector('#save-changes');
+        saveButton.classList.remove('hidden');
+        const cancelChanges = element.querySelector('#cancel-changes');
+        cancelChanges.classList.remove('hidden');
     }
 
     const closeTaskEdition = (element, object) => {
@@ -49,6 +53,10 @@ const View = () => {
         projectEdit.classList.add('hidden');
         const dateEdit = element.querySelector('#date-edit');
         dateEdit.classList.add('hidden');
+        const saveButton = element.querySelector('#save-changes');
+        saveButton.classList.add('hidden');
+        const cancelChanges = element.querySelector('#cancel-changes');
+        cancelChanges.classList.add('hidden');
     }
 
     const deleteTask = (task) => {
@@ -103,7 +111,6 @@ const View = () => {
         const projectEdit = document.createElement('i');
         projectEdit.id = 'project-edit';
         projectEdit.classList.add('fas', 'fa-chevron-down', 'select--small', 'hidden');
-        projectEdit.addEventListener('click', openProjectSelect.bind(taskProject));
         taskProject.appendChild(projectIcon);
         taskProject.appendChild(projectName);
         taskProject.appendChild(projectEdit);
@@ -120,6 +127,7 @@ const View = () => {
         const dateEdit = document.createElement('i');
         dateEdit.id = 'date-edit';
         dateEdit.classList.add('fas', 'fa-chevron-down', 'select--small', 'hidden');
+        
         taskDate.appendChild(dateIcon);
         taskDate.appendChild(date);
         taskDate.appendChild(dateEdit);
@@ -231,9 +239,25 @@ const View = () => {
         const deleteButton = document.createElement('i');
         deleteButton.classList.add('fas', 'fa-trash-alt', 'task--button');
         deleteButton.id = 'delete';
-        taskContainer.appendChild(priorityEdit);
-        taskContainer.appendChild(editButton);
-        taskContainer.appendChild(deleteButton);
+
+        const saveChangesButton = document.createElement('button');
+        saveChangesButton.innerHTML = 'Save';
+        saveChangesButton.id = 'save-changes';
+        saveChangesButton.classList.add('edit-buttons', 'hidden');
+        const discardChangesButton = document.createElement('button');
+        discardChangesButton.innerHTML = 'Cancel';
+        discardChangesButton.id = 'cancel-changes';
+        discardChangesButton.classList.add('edit-buttons', 'hidden');
+
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.classList.add('buttons-container');
+        buttonsContainer.appendChild(priorityEdit);
+        buttonsContainer.appendChild(editButton);
+        buttonsContainer.appendChild(deleteButton);
+        buttonsContainer.appendChild(saveChangesButton);
+        buttonsContainer.appendChild(discardChangesButton);
+
+        taskContainer.appendChild(buttonsContainer);
     
         return taskContainer;
     }

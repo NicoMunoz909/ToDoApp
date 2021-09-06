@@ -1,13 +1,12 @@
 import {View} from './view.js'
 import {Model} from './model.js'
+import {Calendar} from './calendar.js'
 
 const Controller = (() => {
 
     const view = View();
     const model = Model();
-
-    let editing = true;
-
+    const calendar = Calendar();
   
     function checkboxCallback() {
         const taskElement = this[0];
@@ -65,20 +64,37 @@ const Controller = (() => {
         taskObject.priority = "Very High";
     }
 
-    function toggleTaskEdition() {
+    function openTaskEdition() {
         const taskElement = this[0];
         const taskObject = this[1];
-        if(editing) {
-            view.openTaskEdition(taskElement, taskObject);
-            editing = false;
-        }
-        else {
-            taskObject.title = taskElement.querySelector('#title-edit').value;
-            taskObject.description = taskElement.querySelector('#description-edit').value;
-            view.closeTaskEdition(taskElement, taskObject);
-            editing = true;
-            console.log(taskObject);
-        }
+        view.openTaskEdition(taskElement, taskObject);
+    }
+
+    function closeTaskEdition() {
+        const taskElement = this[0];
+        const taskObject = this[1];
+        view.closeTaskEdition(taskElement, taskObject);
+    }
+
+    function openFormCalendar() {
+        const taskElement = this[0];
+        const taskObject = this[1];
+
+        const calendario = calendar.createCalendar();
+        taskElement.appendChild(calendario);
+    }
+
+    function saveTaskChanges() {
+        const taskElement = this[0];
+        const taskObject = this[1];
+
+        const title = taskElement.querySelector('#title-edit').value;
+        const description = taskElement.querySelector('#description-edit').value;
+        
+        taskObject.title = title;
+        taskObject.description = description;
+        taskElement.querySelector('#title').textContent = title;
+        taskElement.querySelector('#description').textContent = description;
     }
 
     function deleteTask() {
@@ -87,7 +103,6 @@ const Controller = (() => {
         view.deleteTask(taskElement);
         model.deleteTask(taskObject);
     }
-
 
     const addTaskEventListeners = (taskElement, taskObject) => {
 
@@ -111,11 +126,21 @@ const Controller = (() => {
         const priorityVeryHigh = taskElement.querySelector('#priority-vhigh');
         priorityVeryHigh.addEventListener('click', setPriorityVeryHigh.bind(argsArray));
 
-        const edit = taskElement.querySelector('#edit');
-        edit.addEventListener('click', toggleTaskEdition.bind(argsArray));
+        const editButton = taskElement.querySelector('#edit');
+        editButton.addEventListener('click', openTaskEdition.bind(argsArray));
+
+        const saveChanges = taskElement.querySelector('#save-changes');
+        saveChanges.addEventListener('click', saveTaskChanges.bind(argsArray));
+        saveChanges.addEventListener('click', closeTaskEdition.bind(argsArray));
+
+        const cancelChanges = taskElement.querySelector('#cancel-changes');
+        cancelChanges.addEventListener('click', closeTaskEdition.bind(argsArray));
 
         const deleteButton = taskElement.querySelector('#delete');
         deleteButton.addEventListener('click', deleteTask.bind(argsArray));
+
+        const editDate = taskElement.querySelector('#date-edit');
+        editDate.addEventListener('click', openFormCalendar.bind(argsArray));
     }
 
     function createTask() {
@@ -132,6 +157,8 @@ const Controller = (() => {
         view.appendTask(taskElement);
     }
 
+
+
     view.loadSidebar();
     view.loadMain();
     view.loadTasks(model.taskList["Inbox"])
@@ -145,6 +172,7 @@ const Controller = (() => {
     const createTaskButton = document.getElementById('accept-form');
     createTaskButton.addEventListener('click', createTask)
     createTaskButton.addEventListener('click', view.closeCreateTaskForm);
+
 })();
 
 export {Controller}

@@ -1,0 +1,69 @@
+* {
+    box-sizing: border-box;
+}
+.calendar-container {
+    border: 1px solid black;
+    width: 350px;
+    height: 300px;
+    margin: auto;
+    border-radius: 10px;
+    position: absolute;
+    z-index: 800;
+    background-color: black;
+}
+.calendar-header {
+    border-bottom: 1px solid black;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.previous {
+    position: relative;
+    left: 10px;
+}
+
+.previous:hover {
+    cursor: pointer;
+}
+.next {
+    position: relative;
+    right: 10px;
+}
+.next:hover {
+    cursor: pointer;
+}
+.calendar-grid {
+    display: grid;
+    height: 250px;
+    width: 100%;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    text-align: center;
+}
+.grid-header {
+    grid-column: span 7;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: 1fr;
+}
+.grid-body {
+    grid-column: span 7;
+    grid-row: span 7;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+.grid-cell {
+    width: 60%;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+.grid-cell:hover {
+    cursor: pointer;
+    background-color: rgb(54, 52, 52);
+    transition: 0.4s;
+}
