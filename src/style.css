@@ -317,6 +317,7 @@ header {
   top: 10%;
   display: none;
   opacity: 0;
+  overflow: visible;
 }
 
 .form--title {
@@ -332,6 +333,8 @@ header {
 
 .form--date {
   grid-column: 8/10;
+  display: flex;
+  align-items: center;
 }
 
 .form--description {
@@ -342,6 +345,11 @@ header {
 
 .form--description--container {
   height: 100%;
+}
+
+#date-string {
+  position: relative;
+  left: 1em;
 }
 
 .form--priority {
@@ -438,4 +446,9 @@ input:focus-visible {
 
 ::-webkit-calendar-picker-indicator {
   filter: invert(1);
+}
+
+.hoverable:hover {
+  cursor: pointer;
+  color: black;
 }

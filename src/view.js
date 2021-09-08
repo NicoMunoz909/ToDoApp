@@ -118,12 +118,14 @@ const View = () => {
     
         const taskDate = document.createElement('div');
         taskDate.classList.add('task--date');
+        taskDate.id = 'task-date';
         const dateIcon = document.createElement('i');
         dateIcon.classList.add('far', 'fa-calendar-alt');
         dateIcon.id = 'date';
         const date = document.createElement('p');
         date.classList.add('task--text');
-        date.textContent = task.date;
+        date.id = 'date-string';
+        date.textContent = task.dateString;
         const dateEdit = document.createElement('i');
         dateEdit.id = 'date-edit';
         dateEdit.classList.add('fas', 'fa-chevron-down', 'select--small', 'hidden');
@@ -392,8 +394,9 @@ const View = () => {
         
     }
 
-    const openCreateTaskForm = () => {
+    function openCreateTaskForm() {
         let form = document.getElementById('create-task-form');
+        form.querySelector('#date-string').textContent = this;
         let opaque = document.getElementById('opaque');
         form.classList.add('form--visible');
         opaque.classList.add('opaque--visible');
@@ -403,6 +406,7 @@ const View = () => {
         let form = document.getElementById('create-task-form');
         let opaque = document.getElementById('opaque');
         form.reset()
+        form.querySelector('#date-string').textContent = "";
         form.classList.remove('form--visible');
         opaque.classList.remove('opaque--visible');
     }

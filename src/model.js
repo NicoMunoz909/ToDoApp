@@ -4,8 +4,8 @@ const Model = () => {
     "Inbox": []
   }
 
-  const newTask = (title, description, date, priority, project, isCompleted = false) => {
-    const task = {title,description,date,priority,project, isCompleted}
+  const newTask = (title, description, dateObject, dateString, priority, project, isCompleted = false) => {
+    const task = {title,description,dateObject,dateString,priority,project, isCompleted}
     taskList[project].push(task);
     return task
   }

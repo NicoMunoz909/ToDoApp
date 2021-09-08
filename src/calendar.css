@@ -8,8 +8,11 @@
     margin: auto;
     border-radius: 10px;
     position: absolute;
+    justify-self: flex-end;
+    align-self: flex-start;
     z-index: 800;
     background-color: black;
+    top: 3em;
 }
 .calendar-header {
     border-bottom: 1px solid black;

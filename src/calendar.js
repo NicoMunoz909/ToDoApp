@@ -9,8 +9,10 @@ const Calendar = () => {
     const weekNumber = datefns.getWeekOfMonth(startOfMonth);
     let gridNumber = (weekNumber-1)*7 + dayOfWeek+1;
     const array = new Array(42);
+    let date = new Date;
+    let dateString = "";
 
-    function createCalendar() {
+    const element = (() => {
         const calendarContainer = document.createElement('div');
         calendarContainer.classList.add('calendar-container');
 
@@ -78,15 +80,12 @@ const Calendar = () => {
         calendarGrid.appendChild(gridBody);
         calendarContainer.appendChild(calendarGrid);
 
-        //const nextMonth = gridHeader.getElementById('next-month');
         rightArrow.addEventListener('click', loadNextMonth);
-        //const previousMonth = gridHeader.getElementById('previous-month');
         leftArrow.addEventListener('click', loadPreviousMonth);
-        //const header = gridHeader.getElementById('month');
         headerText.addEventListener('click', goToToday);
 
         return calendarContainer
-    }
+    })()
 
     function loadArray(){
         //Locate startOfMonth on the grid
@@ -102,19 +101,19 @@ const Calendar = () => {
         }
     }
 
-    function populateCalendarGrid() {
+    function populateGrid() {
         array.forEach(date => {
             if(datefns.getMonth(date) == datefns.getMonth(startOfMonth)) {
                 let position = (datefns.getWeekOfMonth(date)-1)*7 + (datefns.getDay(date)+1);
-                let grid = document.querySelector(`[data-pos="${position}"]`);
+                let grid = element.querySelector(`[data-pos="${position}"]`);
                 grid.textContent = `${datefns.getDate(date)}`;
             } 
         })
     }
 
-    function wipeCalendarGrid() {
+    function wipeGrid() {
         for (let i = 1; i <= 42; i++) {
-            let grid = document.querySelector(`[data-pos="${i}"]`);
+            let grid = element.querySelector(`[data-pos="${i}"]`);
             grid.textContent = '';
         }
     }
@@ -125,51 +124,51 @@ const Calendar = () => {
         let monthName = "";
         switch (month) {
             case 0:
-                monthName = document.getElementById('month');
+                monthName = element.querySelector('#month');
                 monthName.textContent = `Jan ${year}`;
                 break;
             case 1:
-                monthName = document.getElementById('month');
+                monthName = element.querySelector('#month');
                 monthName.textContent = `Feb ${year}`;
                 break;
             case 2:
-                monthName = document.getElementById('month');
+                monthName = element.querySelector('#month');
                 monthName.textContent = `Mar ${year}`;
                 break;
             case 3:
-                monthName = document.getElementById('month');
+                monthName = element.querySelector('#month');
                 monthName.textContent = `Apr ${year}`;
                 break;
             case 4:
-                monthName = document.getElementById('month');
+                monthName = element.querySelector('#month');
                 monthName.textContent = `May ${year}`;
                 break;
             case 5:
-                monthName = document.getElementById('month');
+                monthName = element.querySelector('#month');
                 monthName.textContent = `Jun ${year}`;
                 break;
             case 6:
-                monthName = document.getElementById('month');
+                monthName = element.querySelector('#month');
                 monthName.textContent = `Jul ${year}`;
                 break;
             case 7:
-                monthName = document.getElementById('month');
+                monthName = element.querySelector('#month');
                 monthName.textContent = `Aug ${year}`;
                 break;
             case 8:
-                monthName = document.getElementById('month');
+                monthName = element.querySelector('#month');
                 monthName.textContent = `Sep ${year}`;
                 break;
             case 9:
-                monthName = document.getElementById('month');
+                monthName = element.querySelector('#month');
                 monthName.textContent = `Oct ${year}`;
                 break;
             case 10:
-                monthName = document.getElementById('month');
+                monthName = element.querySelector('#month');
                 monthName.textContent = `Nov ${year}`;
                 break;
             case 11:
-                monthName = document.getElementById('month');
+                monthName = element.querySelector('#month');
                 monthName.textContent = `Dic ${year}`;
                 break;
             default:
@@ -180,48 +179,77 @@ const Calendar = () => {
     function loadNextMonth() {
         startOfMonth = datefns.addMonths(startOfMonth,1);
         loadArray();
-        wipeCalendarGrid();
+        wipeGrid();
         setMonthName();
-        populateCalendarGrid();
+        populateGrid();
     }
 
     function loadPreviousMonth() {
         startOfMonth = datefns.subMonths(startOfMonth,1);
         loadArray();
-        wipeCalendarGrid();
+        wipeGrid();
         setMonthName();
-        populateCalendarGrid();
+        populateGrid();
     }
 
     function returnDate() {
         const day = this.textContent;
-        const month = document.getElementById('month').textContent.split(' ')[0];
-        const year = document.getElementById('month').textContent.split(' ')[1];
+        const month = element.querySelector('#month').textContent.split(' ')[0];
+        const year = element.querySelector('#month').textContent.split(' ')[1];
 
         const monthToNumber = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dic'];
 
-        const dateString = (`${month} ${day}, ${year}`);
-        const date = new Date(year, monthToNumber.indexOf(month), day);
+        let string = (`${month} ${day}, ${year}`);
+        let object = new Date(year, monthToNumber.indexOf(month), day);
 
-        console.log(dateString);
+        element.parentNode.querySelector('#date-string').textContent = string;
 
-        return date;
+        element.remove();
+
+        setDate(string, object)
+
+    }
+
+    function setDate(string, object) {
+        dateString = string;
+        date = object;
+        console.log(date, dateString);
     }
 
     function goToToday() {
         startOfMonth = datefns.startOfMonth(today);
         loadArray();
-        wipeCalendarGrid();
+        wipeGrid();
         setMonthName();
-        populateCalendarGrid();
+        populateGrid();
+
+        setDate(datefns.format(today, 'PP'), today);
     }
 
-    //createCalendar();
-    //loadArray();
-    //setMonthName();
-    //populateCalendarGrid();
+    function goToDate() {
+        startOfMonth = datefns.startOfMonth(date);
+        loadArray();
+        wipeGrid();
+        setMonthName();
+        populateGrid();
 
-    return {createCalendar}
+        setDate(datefns.format(date, 'PP'), date);
+    }
+
+    function getDate() {
+        return date
+    }
+
+    function getDateString() {
+        return dateString
+    }
+
+    goToToday();
+    loadArray();
+    populateGrid();
+    setMonthName();
+
+    return {element, goToToday, goToDate, getDate, getDateString, setDate}
 };
 
 export {Calendar}

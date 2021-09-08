@@ -68,6 +68,7 @@ const Controller = (() => {
         const taskElement = this[0];
         const taskObject = this[1];
         view.openTaskEdition(taskElement, taskObject);
+        calendar.setDate(taskObject.dateString, taskObject.dateObject);
     }
 
     function closeTaskEdition() {
@@ -76,12 +77,21 @@ const Controller = (() => {
         view.closeTaskEdition(taskElement, taskObject);
     }
 
-    function openFormCalendar() {
+    function openTaskCalendar() {
         const taskElement = this[0];
         const taskObject = this[1];
 
-        const calendario = calendar.createCalendar();
-        taskElement.appendChild(calendario);
+        
+
+        taskElement.querySelector('#task-date').appendChild(calendar.element);
+        calendar.goToDate();
+    }
+
+    function openFormCalendar() {
+        const dateContainer = this;
+        
+        dateContainer.parentNode.appendChild(calendar.element);
+        calendar.goToDate(); 
     }
 
     function saveTaskChanges() {
@@ -93,8 +103,19 @@ const Controller = (() => {
         
         taskObject.title = title;
         taskObject.description = description;
+        taskObject.dateObject = calendar.getDate();
+        taskObject.dateString = calendar.getDateString();
         taskElement.querySelector('#title').textContent = title;
         taskElement.querySelector('#description').textContent = description;
+
+        console.log(taskObject)
+    }
+
+    function cancelTaskChanges() {
+        const taskElement = this[0];
+        const taskObject = this[1];
+
+        taskElement.querySelector('#date-string').textContent = taskObject.dateString;
     }
 
     function deleteTask() {
@@ -134,13 +155,14 @@ const Controller = (() => {
         saveChanges.addEventListener('click', closeTaskEdition.bind(argsArray));
 
         const cancelChanges = taskElement.querySelector('#cancel-changes');
+        cancelChanges.addEventListener('click', cancelTaskChanges.bind(argsArray));
         cancelChanges.addEventListener('click', closeTaskEdition.bind(argsArray));
 
         const deleteButton = taskElement.querySelector('#delete');
         deleteButton.addEventListener('click', deleteTask.bind(argsArray));
 
         const editDate = taskElement.querySelector('#date-edit');
-        editDate.addEventListener('click', openFormCalendar.bind(argsArray));
+        editDate.addEventListener('click', openTaskCalendar.bind(argsArray));
     }
 
     function createTask() {
@@ -148,11 +170,12 @@ const Controller = (() => {
         const title = document.getElementById('task-title').value;
         const description = document.getElementById('task-description').value;
         const project = document.getElementById('task-project').value;
-        const date = document.getElementById('task-date').value;
+        const dateObject = calendar.getDate();
+        const dateString = calendar.getDateString();
         const priority = document.getElementById('task-priority').value;
-
-        const taskObject = model.newTask(title,description,date,priority,project);
+        const taskObject = model.newTask(title,description,dateObject,dateString,priority,project);
         const taskElement = view.createTask(taskObject);
+
         addTaskEventListeners(taskElement,taskObject);
         view.appendTask(taskElement);
     }
@@ -164,7 +187,8 @@ const Controller = (() => {
     view.loadTasks(model.taskList["Inbox"])
 
     const newTaskButton = document.getElementById('new-task');
-    newTaskButton.addEventListener('click', view.openCreateTaskForm);
+    newTaskButton.addEventListener('click', view.openCreateTaskForm.bind(calendar.getDateString()));
+    newTaskButton.addEventListener('click', calendar.goToToday);
 
     const closeFormButton = document.getElementById('close-form');
     closeFormButton.addEventListener('click', view.closeCreateTaskForm);
@@ -172,6 +196,9 @@ const Controller = (() => {
     const createTaskButton = document.getElementById('accept-form');
     createTaskButton.addEventListener('click', createTask)
     createTaskButton.addEventListener('click', view.closeCreateTaskForm);
+
+    const formDateButton = document.getElementById('create-task-form').querySelector('#task-date');
+    formDateButton.addEventListener('click', openFormCalendar.bind(formDateButton));
 
 })();
 
