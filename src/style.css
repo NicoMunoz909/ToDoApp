@@ -333,8 +333,10 @@ header {
 
 .form--date {
   grid-column: 8/10;
-  display: flex;
-  align-items: center;
+}
+
+#date-string {
+  display: inline;
 }
 
 .form--description {
@@ -347,10 +349,7 @@ header {
   height: 100%;
 }
 
-#date-string {
-  position: relative;
-  left: 1em;
-}
+
 
 .form--priority {
   display: flex;

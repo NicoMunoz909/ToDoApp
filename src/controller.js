@@ -77,21 +77,26 @@ const Controller = (() => {
         view.closeTaskEdition(taskElement, taskObject);
     }
 
-    function openTaskCalendar() {
+    function toggleTaskCalendar() {
         const taskElement = this[0];
         const taskObject = this[1];
 
-        
-
-        taskElement.querySelector('#task-date').appendChild(calendar.element);
-        calendar.goToDate();
+        if(taskElement.querySelector('#task-date').contains(calendar.element)){
+            taskElement.querySelector('#task-date').removeChild(calendar.element);
+        } else {
+            taskElement.querySelector('#task-date').appendChild(calendar.element);
+            calendar.goToDate();
+        }
     }
 
-    function openFormCalendar() {
+    function toggleFormCalendar() {
         const dateContainer = this;
-        
-        dateContainer.parentNode.appendChild(calendar.element);
-        calendar.goToDate(); 
+        if(dateContainer.parentNode.contains(calendar.element)){
+            dateContainer.parentNode.removeChild(calendar.element);
+        } else {
+            dateContainer.parentNode.appendChild(calendar.element);
+            calendar.goToDate();
+        }
     }
 
     function saveTaskChanges() {
@@ -162,7 +167,7 @@ const Controller = (() => {
         deleteButton.addEventListener('click', deleteTask.bind(argsArray));
 
         const editDate = taskElement.querySelector('#date-edit');
-        editDate.addEventListener('click', openTaskCalendar.bind(argsArray));
+        editDate.addEventListener('click', toggleTaskCalendar.bind(argsArray));
     }
 
     function createTask() {
@@ -198,7 +203,7 @@ const Controller = (() => {
     createTaskButton.addEventListener('click', view.closeCreateTaskForm);
 
     const formDateButton = document.getElementById('create-task-form').querySelector('#task-date');
-    formDateButton.addEventListener('click', openFormCalendar.bind(formDateButton));
+    formDateButton.addEventListener('click', toggleFormCalendar.bind(formDateButton));
 
 })();
 

@@ -213,7 +213,6 @@ const Calendar = () => {
     function setDate(string, object) {
         dateString = string;
         date = object;
-        console.log(date, dateString);
     }
 
     function goToToday() {
